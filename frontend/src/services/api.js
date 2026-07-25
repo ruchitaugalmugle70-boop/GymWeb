@@ -38,9 +38,9 @@ export const loginUser = async (credentials) => {
     return response.data;
 };
 
-// Google OAuth: send the ID token from Google to our backend for verification
-export const googleLogin = async (idToken) => {
-    const response = await API.post("/auth/google", { idToken });
+export const googleLogin = async (googleData) => {
+    const payload = typeof googleData === "string" ? { idToken: googleData } : googleData;
+    const response = await API.post("/auth/google", payload);
     return response.data;
 };
 

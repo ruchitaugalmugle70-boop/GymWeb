@@ -63,7 +63,11 @@ function Login() {
     try {
       const result = await signInWithGoogle();
       if (!result) return;
-      const data = await googleLogin(result.idToken);
+      const data = await googleLogin({
+        idToken: result.idToken,
+        email: result.email,
+        displayName: result.displayName,
+      });
       localStorage.setItem("token", data.token);
       localStorage.setItem("userName", data.name);
       navigate("/dashboard");
