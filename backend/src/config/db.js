@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const seedDatabase = require("./seed");
 
-const DEFAULT_ATLAS_URL = "mongodb+srv://ruchitaugalmugle70_db_user:1YqIjw9oIHuThVjV@cluster0.022gsma.mongodb.net/fitness_platform?retryWrites=true&w=majority";
+const DEFAULT_ATLAS_URL = "mongodb+srv://ruchitaugalmugle70_db_user:GymPass2026@cluster0.022gsma.mongodb.net/fitness_platform?retryWrites=true&w=majority";
 
 const connectDB = async () => {
     try {
