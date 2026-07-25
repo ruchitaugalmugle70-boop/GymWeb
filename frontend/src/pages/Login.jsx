@@ -14,15 +14,24 @@ function Login() {
   const [emailFocus, setEmailFocus] = useState(false);
   const [passFocus, setPassFocus] = useState(false);
 
-  // Handle redirect sign-in result (fires when popup was blocked and
-  // we fell back to signInWithRedirect — the page reloads and lands here)
+  // Handle redirect sign-in result & auto-navigate if already logged in
   useEffect(() => {
+    const existingToken = localStorage.getItem("token");
+    if (existingToken) {
+      navigate("/dashboard");
+      return;
+    }
+
     const handleRedirect = async () => {
       setGoogleLoading(true);
       try {
         const result = await checkRedirectResult();
         if (result) {
-          const data = await googleLogin(result.idToken);
+          const data = await googleLogin({
+            idToken: result.idToken,
+            email: result.email,
+            displayName: result.displayName,
+          });
           localStorage.setItem("token", data.token);
           localStorage.setItem("userName", data.name);
           navigate("/dashboard");
