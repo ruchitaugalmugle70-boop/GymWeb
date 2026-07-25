@@ -5,7 +5,8 @@ const { admin, adminInitialized } = require("../config/firebaseAdmin");
 
 // ─── Generate JWT Token for our app ─────────────────────────────────────────
 const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "30d" });
+  const secret = process.env.JWT_SECRET || "default_jwt_secret_key_gymweb_2026";
+  return jwt.sign({ id }, secret, { expiresIn: "30d" });
 };
 
 // ─── Verify Firebase ID Token ────────────────────────────────────────────────

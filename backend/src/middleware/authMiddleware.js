@@ -10,11 +10,8 @@ const protect = async (req, res, next) => {
             req.headers.authorization.split(" ")[1];
 
         try {
-            const decoded =
-                jwt.verify(
-                    token,
-                    process.env.JWT_SECRET
-                );
+            const secret = process.env.JWT_SECRET || "default_jwt_secret_key_gymweb_2026";
+            const decoded = jwt.verify(token, secret);
             req.user = decoded;
             next();
         } catch (error) {
