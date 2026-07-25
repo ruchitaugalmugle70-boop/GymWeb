@@ -1,0 +1,30 @@
+const mongoose=require("mongoose");
+const progressSchema=mongoose.Schema({
+    userId:{
+        type:mongoose.Schema.Types.ObjectId,
+        required:true,
+        ref:"User"
+    },
+    workoutId:{
+        type:mongoose.Schema.Types.ObjectId,
+        required:true,
+        ref:"Workout"
+    },
+    completed:{
+        type:Boolean,
+        default:false
+    },
+    caloriesBurned:{
+        type:Number,
+        default:0
+    },
+    workoutDuration:{
+        type:Number,
+        default:0
+    }
+},{
+    timestamps:true
+});
+module.exports=mongoose.model(
+    "Progress",
+    progressSchema);

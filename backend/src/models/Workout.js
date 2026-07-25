@@ -1,0 +1,61 @@
+const mongoose=require("mongoose");
+
+const workoutSchema=new mongoose.Schema({
+    title:{
+        type:String,
+        required:true,
+        trim:true,
+    },
+    description:{
+        type:String,
+        required:true,
+    },
+    category:{
+        type:String,
+        enum:[
+            "strength",
+            "Cardio",
+            "Flexibility",
+            "HIIT",
+            "Full Body",
+        ],
+        required:true,
+    },
+    difficulty:{
+        type:String,
+        enum:["Beginner","Intermediate","Advanced"],
+        default:"Beginner",
+    },
+    exercises:[
+        {
+            exercise:{
+                type:mongoose.Schema.Types.ObjectId,
+                ref:"Exercise",
+                required:true,
+            },
+            sets:{
+                type:Number,
+                required:true,
+            },
+            reps:{
+                type:Number,
+                required:true,
+            },
+            restTime:{
+                type:Number,
+                default:60,
+            },
+        },
+    ],
+    createdBy:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User",
+        required:true,
+    },
+    
+},
+{
+   timestamps:true,
+}
+);
+module.exports=mongoose.model("Workout",workoutSchema); 

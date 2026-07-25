@@ -1,0 +1,25 @@
+# Node dependencies
+node_modules/
+**/node_modules/
+
+# Environment variables & secrets
+.env
+**/.env
+*.env
+serviceAccountKey.json
+**/serviceAccountKey.json
+
+# Build outputs
+dist/
+**/dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Operating System & IDE
+.DS_Store
+**/.DS_Store
+.vscode/
+.idea/
