@@ -355,7 +355,7 @@ function Login() {
             color: "#94a3b8", fontSize: "14px",
             fontFamily: "'Inter', sans-serif",
           }}>
-            New athlete?{" "}
+            New user?{" "}
             <Link to="/register" style={{ color: "var(--accent-cyan)", textDecoration: "none", fontWeight: 700 }}
               onMouseEnter={(e) => e.currentTarget.style.color = "var(--accent-purple)"}
               onMouseLeave={(e) => e.currentTarget.style.color = "var(--accent-cyan)"}
