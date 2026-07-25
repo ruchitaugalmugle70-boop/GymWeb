@@ -68,13 +68,14 @@ function Login() {
       localStorage.setItem("userName", data.name);
       navigate("/dashboard");
     } catch (error) {
-      console.error(error);
+      console.error("Google Sign-In Error:", error);
       if (error.message === "POPUP_CLOSED") {
         setErrorMsg("");
       } else {
         setErrorMsg(
           error.response?.data?.message ||
-          "Google sign-in failed. Please try again."
+          error.message ||
+          "Google authentication failed."
         );
       }
     } finally {

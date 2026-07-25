@@ -43,7 +43,6 @@ export const signInWithGoogle = async () => {
       photoURL: result.user.photoURL,
     };
   } catch (error) {
-    // Popup was closed by user — don't throw a scary error
     if (
       error.code === "auth/popup-closed-by-user" ||
       error.code === "auth/cancelled-popup-request"
@@ -51,15 +50,13 @@ export const signInWithGoogle = async () => {
       throw new Error("POPUP_CLOSED");
     }
 
-    // Popup was blocked by the browser — use redirect instead
-    if (error.code === "auth/popup-blocked") {
+    // If popup blocked or blocked by cross-origin policies in Safari/iOS, fall back to redirect
+    try {
       await signInWithRedirect(auth, googleProvider);
-      // The page will reload; result is handled by checkRedirectResult()
       return null;
+    } catch {
+      throw error;
     }
-
-    // Network or other error
-    throw error;
   }
 };
 
