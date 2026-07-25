@@ -5,8 +5,6 @@ const DEFAULT_ATLAS_URL = "mongodb+srv://ruchitaugalmugle70_db_user:GymPass2026@
 
 const connectDB = async () => {
     try {
-        mongoose.set("bufferCommands", false);
-
         const mongoUrl = (process.env.MONGO_URL && process.env.MONGO_URL.startsWith("mongodb+srv://")) 
             ? process.env.MONGO_URL 
             : DEFAULT_ATLAS_URL;

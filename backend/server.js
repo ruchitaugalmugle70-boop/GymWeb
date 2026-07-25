@@ -45,10 +45,18 @@ app.use((req, res) => {
     });
 });
 
-// Start Server
+// Start Server: Connect to MongoDB first, then start listening
 const PORT = process.env.PORT || 8000;
 
-app.listen(PORT, "0.0.0.0", async () => {
-    console.log(`🚀 Server running on port ${PORT}`);
-    await connectDB();
-});
+const startServer = async () => {
+    try {
+        await connectDB();
+        app.listen(PORT, "0.0.0.0", () => {
+            console.log(`🚀 Server running on port ${PORT}`);
+        });
+    } catch (err) {
+        console.error("❌ Failed to start server:", err);
+    }
+};
+
+startServer();
