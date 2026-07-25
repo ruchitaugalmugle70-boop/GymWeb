@@ -1,13 +1,18 @@
 const mongoose = require("mongoose");
 const seedDatabase = require("./seed");
 
+const DEFAULT_ATLAS_URL = "mongodb+srv://ruchitaugalmugle70_db_user:1YqIjw9oIHuThVjV@cluster0.022gsma.mongodb.net/fitness_platform?retryWrites=true&w=majority";
+
 const connectDB = async () => {
     try {
-        if (!process.env.MONGO_URL) {
-            console.error("⚠️ MONGO_URL environment variable is missing!");
-            return;
-        }
-        const conn = await mongoose.connect(process.env.MONGO_URL);
+        const mongoUrl = (process.env.MONGO_URL && !process.env.MONGO_URL.includes("127.0.0.1")) 
+            ? process.env.MONGO_URL 
+            : DEFAULT_ATLAS_URL;
+
+        const conn = await mongoose.connect(mongoUrl, {
+            serverSelectionTimeoutMS: 5000,
+        });
+
         console.log(`MongoDB Connected: ${conn.connection.host}`);
         await seedDatabase();
     } catch (error) {
