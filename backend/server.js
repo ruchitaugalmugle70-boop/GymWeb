@@ -12,9 +12,13 @@ const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "admin123";
 // Ensure that ADMIN_EMAIL and ADMIN_PASSWORD are set for admin access.
 
 
-// Connect Database
-const connectDB = require("./src/config/db");
-connectDB();
+// Start Server
+const PORT = process.env.PORT || 8000;
+
+app.listen(PORT, "0.0.0.0", async () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+    await connectDB();
+});
 
 // Import Routes
 const authRoutes = require("./src/routes/authRoutes");
@@ -53,11 +57,4 @@ app.use((req, res) => {
         success: false,
         message: "Route not found"
     });
-});
-
-// Start Server
-const PORT = process.env.PORT || 8000;
-
-app.listen(PORT, "0.0.0.0", async () => {
-    console.log(`🚀 Server running on port ${PORT}`);
 });
