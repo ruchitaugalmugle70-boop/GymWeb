@@ -51,13 +51,6 @@ app.use((req, res) => {
 // Start Server
 const PORT = process.env.PORT || 8000;
 
-// After server starts, run seed if needed
-app.listen(PORT, async () => {
+app.listen(PORT, "0.0.0.0", async () => {
     console.log(`🚀 Server running on port ${PORT}`);
-    try {
-        await seedDatabase();
-        console.log("✅ Seed script executed (if needed).");
-    } catch (err) {
-        console.error("❌ Seed script error:", err);
-    }
 });
