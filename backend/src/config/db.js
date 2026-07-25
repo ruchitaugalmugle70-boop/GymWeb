@@ -5,17 +5,17 @@ const DEFAULT_ATLAS_URL = "mongodb+srv://ruchitaugalmugle70_db_user:1YqIjw9oIHuT
 
 const connectDB = async () => {
     try {
-        mongoose.set("bufferCommands", false);
-
-        const mongoUrl = (process.env.MONGO_URL && !process.env.MONGO_URL.includes("127.0.0.1")) 
+        // Enforce mongodb+srv Atlas connection for cloud deployment
+        const mongoUrl = (process.env.MONGO_URL && process.env.MONGO_URL.startsWith("mongodb+srv://")) 
             ? process.env.MONGO_URL 
             : DEFAULT_ATLAS_URL;
 
+        console.log("Connecting to MongoDB Atlas...");
         const conn = await mongoose.connect(mongoUrl, {
             serverSelectionTimeoutMS: 5000,
         });
 
-        console.log(`MongoDB Connected: ${conn.connection.host}`);
+        console.log(`✅ MongoDB Connected Successfully: ${conn.connection.host}`);
         await seedDatabase();
     } catch (error) {
         console.error("❌ MongoDB Connection Error:", error.message);
