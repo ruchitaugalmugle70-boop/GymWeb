@@ -1,6 +1,6 @@
 import axios from "axios";
 
-let rawBaseURL = import.meta.env.VITE_API_URL || "http://localhost:8000/api";
+let rawBaseURL = import.meta.env.VITE_API_URL || "https://gymweb-s8rt.onrender.com/api";
 rawBaseURL = rawBaseURL.trim().replace(/\/+$/, "");
 if (!rawBaseURL.endsWith("/api")) {
     rawBaseURL += "/api";
