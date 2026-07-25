@@ -34,11 +34,18 @@ app.get("/", (req, res) => {
     res.status(200).send("Fitness Platform Backend Running 🚀");
 });
 
-// API Routes
+// API Routes (Support both /api/* and root /* paths)
 app.use("/api/auth", authRoutes);
+app.use("/auth", authRoutes);
+
 app.use("/api/workouts", workoutRoutes);
+app.use("/workouts", workoutRoutes);
+
 app.use("/api/progress", progressRoutes);
-app.use("/api/exercises",exerciseRoutes);
+app.use("/progress", progressRoutes);
+
+app.use("/api/exercises", exerciseRoutes);
+app.use("/exercises", exerciseRoutes);
 
 // Handle Undefined Routes
 app.use((req, res) => {
