@@ -1,31 +1,17 @@
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const connectDB = require("./src/config/db");
 
 // Load environment variables
 dotenv.config();
-
-// Prompt for admin credentials if not set in env
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "admin@example.com";
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "admin123";
-// Credentials are now sourced from .env; no interactive prompt needed.
-// Ensure that ADMIN_EMAIL and ADMIN_PASSWORD are set for admin access.
-
-
-// Start Server
-const PORT = process.env.PORT || 8000;
-
-app.listen(PORT, "0.0.0.0", async () => {
-    console.log(`🚀 Server running on port ${PORT}`);
-    await connectDB();
-});
 
 // Import Routes
 const authRoutes = require("./src/routes/authRoutes");
 const workoutRoutes = require("./src/routes/workoutRoutes");
 const progressRoutes = require("./src/routes/progressRoutes");
 const exerciseRoutes = require("./src/routes/exerciseRoutes");
-const seedDatabase = require("./src/config/seed");
+
 // Initialize Express App
 const app = express();
 
@@ -57,4 +43,12 @@ app.use((req, res) => {
         success: false,
         message: "Route not found"
     });
+});
+
+// Start Server
+const PORT = process.env.PORT || 8000;
+
+app.listen(PORT, "0.0.0.0", async () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+    await connectDB();
 });

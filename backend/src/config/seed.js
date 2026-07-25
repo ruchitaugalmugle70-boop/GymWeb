@@ -18,7 +18,7 @@ const seedDatabase = async () => {
                 password: hashedPassword,
                 role: "admin",
                 age: 30,
-                gender: "Male",
+                gender: "male",
                 height: 180,
                 weight: 80
             });
